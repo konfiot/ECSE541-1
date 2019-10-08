@@ -16,10 +16,12 @@ class simple_mem : public sc_module, public simple_mem_if
 
 		simple_mem::Read(unsigned int addr, unsigned int& data) {
 			data = this.data[addr];
+			return true; // TODO check bounds
 		}
 
 		simple_mem::Write(unsigned int addr, unsigned int data) {
-			this.data[addr] = data
+			this.data[addr] = data;
+			return true; // TODO check bounds
 		}
 
 };
