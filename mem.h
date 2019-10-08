@@ -22,6 +22,7 @@ class simple_mem : public sc_module, public simple_mem_if
 
 			while(memfile >> data) {
 				this->Write(i, data);
+				i++;
 			}
 		}
 
