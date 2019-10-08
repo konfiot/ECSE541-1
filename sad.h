@@ -23,7 +23,7 @@ SC_MODULE(sad)
 				sad += v;
 			}
 			MEM->Write(SAD_OUTPUT_ADDR + block, sad);
-			std::cout << sc_time_stamp() << " | sad : " << sad << ", a : " << a << ", b : " << b << std::endl;
+			std::cout << sc_time_stamp() << " | sad : " << sad << std::endl;
 		}
 	}
 
