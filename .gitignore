@@ -1,7 +1,5 @@
 # Prerequisites
-*.d
-
-# Compiled Object files
+*.d # Compiled Object files
 *.slo
 *.lo
 *.o
@@ -33,3 +31,4 @@
 
 *.un~
 *.swp
+*.txt
