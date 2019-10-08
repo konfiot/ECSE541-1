@@ -3,6 +3,8 @@
 
 SC_MODULE(sad)
 {
+	sc_port<simple_mem_if> MEM;
+
 	void do_sad()
 	{
 		int i, v;
@@ -24,7 +26,7 @@ SC_MODULE(sad)
 		}
 	}
 
-	SC_CTOR(nand2)
+	SC_CTOR(sad)
 	{
 		SC_METHOD(do_sad);
 		sensitive << A << B;
