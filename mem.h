@@ -9,15 +9,28 @@ class simple_mem : public sc_module, public simple_mem_if
 
 	public:
 		// constructor
-		simple_mem(sc_module_name nm) : sc_module(nm), top(0) {}
+		simple_mem(sc_module_name nm, char* filename) : sc_module(nm) {
+			unsigned int data, i = 0;
 
-		simple_mem::Read(unsigned int addr, unsigned int& data) {
-			data = this.data[addr];
+			ifstream memfile;
+			memfile.open(filename);
+			if (!memfile) {
+				cerr << "Error opening file";
+				exit(1);
+			}
+
+			while(memfile >> data) {
+				this->Write(i, data);
+			}
+		}
+
+		bool Read(unsigned int addr, unsigned int& data) {
+			data = this->data[addr];
 			return true; // TODO check bounds
 		}
 
-		simple_mem::Write(unsigned int addr, unsigned int data) {
-			this.data[addr] = data;
+		bool Write(unsigned int addr, unsigned int data) {
+			this->data[addr] = data;
 			return true; // TODO check bounds
 		}
 

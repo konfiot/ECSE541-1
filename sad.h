@@ -29,6 +29,6 @@ SC_MODULE(sad)
 	SC_CTOR(sad)
 	{
 		SC_METHOD(do_sad);
-		sensitive << A << B;
+		//sensitive << A << B;
 	}
 };
