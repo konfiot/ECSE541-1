@@ -1,4 +1,5 @@
-#include "systemc.h"
+#include <systemc.h>
+#include <iostream>
 #include "mem.h"
 #include "sad.h"
 
