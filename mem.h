@@ -26,13 +26,21 @@ class simple_mem : public sc_module, public simple_mem_if
 		}
 
 		bool Read(unsigned int addr, unsigned int& data) {
-			data = this->data[addr];
-			return true; // TODO check bounds
+			if (addr < MEM_SIZE-1) {
+				data = this->data[addr];
+				return true;
+			}
+
+			return false;
 		}
 
 		bool Write(unsigned int addr, unsigned int data) {
-			this->data[addr] = data;
-			return true; // TODO check bounds
+			if (addr < MEM_SIZE-1) {
+				this->data[addr] = data;
+				return true;
+			}
+
+			return false;
 		}
 
 };
