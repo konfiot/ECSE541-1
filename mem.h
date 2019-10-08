@@ -6,7 +6,7 @@
 class simple_mem : public sc_module, public simple_mem_if
 {
 	private:
-		unsigned int data[MEM_SIZE];
+		unsigned int data[MEM_SIZE] = {0};
 
 	public:
 		// constructor

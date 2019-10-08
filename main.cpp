@@ -12,7 +12,7 @@ int sc_main(int argc, char* argv[]) {
 	}
 
 	sad Sad1("SAD1");
-	simple_mem Mem1("SAD1", argv[1]);
+	simple_mem Mem1("MEM1", argv[1]);
 
 	Sad1.MEM(Mem1);
 
