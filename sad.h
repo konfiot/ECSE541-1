@@ -6,7 +6,7 @@
 #ifndef __SAD_H___
 #define __SAD_H___
 
-class sad: public sc_module
+SC_MODULE(sad)
 {
 	sc_port<simple_mem_if> MEM;
 
@@ -14,9 +14,7 @@ class sad: public sc_module
 
 	sc_clock clk;
 
-public :
-	sad(sc_module_name nm, mem MEMORY) : sc_module(nm), MEM(MEMORY)
-	{
+	SC_CTOR(sad) {
 		SC_METHOD(do_sad);
 	}
 };
