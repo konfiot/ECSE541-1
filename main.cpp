@@ -11,13 +11,11 @@ int sc_main(int argc, char* argv[]) {
 		return 1;
 	}
 
-	sad Sad1("SAD1");
-	simple_mem Mem1("MEM1", argv[1]);
+	mem Mem1("MEM1", argv[1]);
+	sad Sad1("SAD1", Mem1);
 
-	Sad1.MEM(Mem1);
-
+	std::cout << std::endl;
 	sc_start();  // run forever
 
 	return 0;
-
 }
