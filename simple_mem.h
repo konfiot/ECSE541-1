@@ -12,6 +12,9 @@ class simple_mem : public sc_module, public simple_mem_if
 		unsigned int data[MEM_SIZE] = {0};
 
 	public:
+		bool Read(unsigned int addr, unsigned int& data);
+		bool Write(unsigned int addr, unsigned int data);
+
 		// constructor
 		simple_mem(sc_module_name nm, char* filename) : sc_module(nm)
 		{
