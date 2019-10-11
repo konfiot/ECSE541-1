@@ -54,7 +54,6 @@ class MEMORY_RTL: public sc_module
 				ack.write(sc_logic_Z);
 				return;
 			}
-
 			// RW functions
 			// address valid
 			sc_uint<32> addr_val = addr.read();
@@ -63,12 +62,14 @@ class MEMORY_RTL: public sc_module
 				// Read mode
 				if(ren.read() == sc_logic_1)
 				{
-					dataOut.write(mem[addr_val]);
+					//std::cout << "Reading from Memory : addr " << addr_val << ", value " << mem[(unsigned int) addr_val] << std::endl;
+					dataOut.write(mem[(unsigned int)addr_val]);
 				}
 				// Write mode
 				else if (wen.read() == sc_logic_1)
 				{
-					mem[addr_val] = dataIn.read();
+					//std::cout << "Writing to Memory : addr " << addr_val << ", value " << mem[(unsigned int) dataIn.read()] << std::endl;
+					mem[(unsigned int)addr_val] = dataIn.read();
 				}
 				// address valid
 				ack.write(sc_logic_1);
