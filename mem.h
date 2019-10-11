@@ -48,13 +48,9 @@ class mem : public sc_module, public simple_mem_if
 			oscillator->os_clk(clk_sig);
 		}
 
-		bool Read(unsigned int addr, unsigned int& data) {
+		bool Read(unsigned int addr, unsigned int& data);
 
-		}
-
-		bool Write(unsigned int addr, unsigned int data) {
-
-		}
+		bool Write(unsigned int addr, unsigned int data);
 
 		// destructor
 		~mem()
