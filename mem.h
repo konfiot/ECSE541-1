@@ -4,7 +4,8 @@
 #include "mem_rtl.h"
 #include "oscillator.h"
 
-typedef sc_signal<sc_uint<32>> mySignal;
+#ifndef ___MEM_H___
+#define ___MEM_H___
 
 class mem : public sc_module, public simple_mem_if
 {
@@ -50,25 +51,4 @@ class mem : public sc_module, public simple_mem_if
 		}
 };
 
-// Interface RW
-bool mem::Read(unsigned int addr, unsigned int& data)
-{
-	ren_sig.write(1);
-	addr_sig.write(dynamic_cast<mySignal>(addr));
-	data = dynamic_cast<unsigned int>(dataOut.read());
-	bool ack = dynamic_cast<bool>(ack.read());
-	ren_sig.write(0);
-
-	return ack;
-}
-
-bool mem::Write(unsigned int addr, unsigned int data)
-{
-	wen_sig.write(1);
-	addr_sig.write(dynamic_cast<mySignal>(addr));
-	dataIn_sig.write(dynamic_cast<mySignal>(data));
-	bool ack = dynamic_cast<unsigned int>(ack.read());
-	ren_sig.write(0);
-
-	return ack;
-}
+#endif //___MEM_H___

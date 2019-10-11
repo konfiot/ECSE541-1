@@ -1,6 +1,9 @@
 #include <systemc.h>
 #include "define.h"
 
+#ifndef __SAD_H___
+#define __SAD_H___
+
 class sad: public sc_module
 {
 	sc_port<simple_mem_if> MEM;
@@ -43,3 +46,5 @@ void sad::do_sad()
 	}
 	sc_stop();
 }
+
+#endif //__SAD_H___

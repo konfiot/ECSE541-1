@@ -1,6 +1,9 @@
 #include <systemc.h>
 #include "define.h"
 
+#ifndef __MEMORY_RTL_H__
+#define __MEMORY_RTL_H__
+
 class MEMORY_RTL: public sc_module
 {
 private:
@@ -74,3 +77,6 @@ void MEMORY_RTL::rtl()
     ack.write(sc_logic_0);
   }
 }
+};
+
+#endif //__MEMORY_RTL_H__

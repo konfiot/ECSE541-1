@@ -3,6 +3,9 @@
 #include "simple_mem_if.h"
 #include "define.h"
 
+#ifndef __SIMPLE_MEM_H__
+#define __SIMPLE_MEM_H__
+
 class simple_mem : public sc_module, public simple_mem_if
 {
 	private:
@@ -31,23 +34,4 @@ class simple_mem : public sc_module, public simple_mem_if
 		}
 };
 
-bool simple_mem::Read(unsigned int addr, unsigned int& data)
-{
-	if (addr < MEM_SIZE-1) {
-		data = this->data[addr];
-		//std::cout << "Reading : " << data << " at address : " << addr << std::endl;
-		return true;
-	}
-
-	return false;
-}
-
-bool simple_mem::Write(unsigned int addr, unsigned int data)
-{
-	if (addr < MEM_SIZE-1) {
-		this->data[addr] = data;
-		return true;
-	}
-
-	return false;
-}
+#endif //__SIMPLE_MEM_H__

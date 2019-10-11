@@ -1,7 +1,9 @@
 #include <systemc.h>
 #include "define.h"
 
-class OSCILLATOR : public sc_module
+#ifndef __OSCILLATOR_H__
+#define __OSCILLATOR_H__
+
 {
   sc_out<sc_logic> clk;
 
@@ -22,3 +24,4 @@ class OSCILLATOR : public sc_module
     SC_METHOD(func);
   }
 };
+#endif //__OSCILLATOR_H__
