@@ -15,7 +15,7 @@ SC_MODULE(sad)
 	sc_clock clk;
 
 	SC_CTOR(sad) {
-		SC_METHOD(do_sad);
+		SC_THREAD(do_sad);
 	}
 };
 
