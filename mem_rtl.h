@@ -50,6 +50,11 @@ public:
       if addr is valid : ack is
     */
 
+	if (ren.read() == sc_logic_0 && wen.read() == sc_logic_0) {
+		ack.write(sc_logic_Z);
+		return;
+	}
+
     // RW functions
     // address valid
     sc_uint<32> addr_val = addr.read();
