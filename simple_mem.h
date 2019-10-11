@@ -1,6 +1,6 @@
 #include <iostream>
 #include <systemc.h>
-#include "mem_if.h"
+#include "simple_mem_if.h"
 #include "define.h"
 
 class simple_mem : public sc_module, public simple_mem_if

@@ -1,6 +1,6 @@
 #include <systemc.h>
 #include "define.h"
-#include "mem_if.h"
+#include "simple_mem_if.h"
 #include "mem_rtl.h"
 #include "oscillator.h"
 
