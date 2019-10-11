@@ -21,8 +21,12 @@ public:
 
   MEMORY_RTL(sc_module_name nm, char* filename) : sc_module(nm)
   {
+
+	cout << "MEMORY RTL constructor\n";
     // Initialize memory
     unsigned int data, i = 0;
+
+	cout << "READGING memory content of file\n";
 
     std::ifstream memfile;
     memfile.open(filename);
@@ -32,11 +36,17 @@ public:
       exit(1);
     }
 
-    while(memfile >> data)
+	cout << "INTIALIZING memory with content on file\n";
+
+
+
+    while(memfile >> data && i < MEM_SIZE)
     {
-      mem[i] = (sc_uint<32>)(data);
+	   mem[i] = (sc_uint<32>)(data);
       i++;
     }
+
+	cout << "CREATING the method\n";
 
     SC_METHOD(rtl);
     sensitive << clk.pos();

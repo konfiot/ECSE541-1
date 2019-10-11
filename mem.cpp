@@ -35,20 +35,24 @@ mem::~mem() {
 }
 
 mem::mem(sc_module_name nm, char* filename) : sc_module(nm) {
-	cout << "ENTERED mem constructor";
+	cout << "ENTERED mem constructor\n";
 
 	// Module instance signal connections
 	mem_rtl = new MEMORY_RTL("mem_rtl", filename);
+
+	cout << "Initializing OSCILLATOR";
+
 	oscillator = new OSCILLATOR("oscillator");
 
-	cout << "ENTERED mem constructor";
+	cout << "ENTERED mem constructor\n";
 
 	// RTL memory
 	mem_rtl->clk(clk_sig);
+
+	cout << "ARRIVING AT PROBLEM";
 	mem_rtl->addr(addr_sig);
 	mem_rtl->dataIn(dataIn_sig);
 	mem_rtl->dataOut(dataOut_sig);
-	cout << "ARRIVING AT PROBLEM";
 	mem_rtl->ren(ren_sig);
 	cout << "PASSED AT PROBLEM";
 	mem_rtl->wen(wen_sig);
