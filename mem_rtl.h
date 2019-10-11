@@ -3,6 +3,9 @@
 
 class MEMORY_RTL: public sc_module
 {
+private:
+    sc_uint<32> mem[MEM_SIZE];
+    
 public:
   sc_in<sc_logic> clk;
   sc_in<sc_logic> ren, wen;
@@ -10,8 +13,6 @@ public:
   sc_in<sc_uint<32>> dataIn;
   sc_out<sc_uint<32>> dataOut;
   sc_out<sc_logic> ack;
-
-  sc_uint<32> mem[MEM_SIZE];
 
   SC_HAS_PROCESS(MEMORY_RTL);
 
@@ -50,35 +51,26 @@ void MEMORY_RTL::rtl()
     if addr is valid : ack is
   */
 
-  // Initialize output ports
-  dataOut.write(0);
-  ack.write(sc_logic_0);
-  wait();
-
   // RW functions
-  while (true)
+  // address valid
+  sc_uint<32> addr_val = addr.read();
+  if (addr_val < MEM_SIZE)
   {
-    // address valid
-    sc_uint<32> addr_val = addr.read();
-    if (addr_val < MEM_SIZE)
+    // Read mode
+    if(ren.read() == sc_logic_1)
     {
-      // Read mode
-      if(ren.read() == sc_logic_1)
-      {
-        dataOut.write(mem[addr_val]);
-      }
-      // Write mode
-      else if (wen.read() == sc_logic_1)
-      {
-        mem[addr_val] = dataIn.read();
-      }
-      ack.write(sc_logic_1);
+      dataOut.write(mem[addr_val]);
     }
-    // address invalid
-    else
+    // Write mode
+    else if (wen.read() == sc_logic_1)
     {
-      ack.write(sc_logic_0);
+      mem[addr_val] = dataIn.read();
     }
-    wait();
+    ack.write(sc_logic_1);
+  }
+  // address invalid
+  else
+  {
+    ack.write(sc_logic_0);
   }
 }
