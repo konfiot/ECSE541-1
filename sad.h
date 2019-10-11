@@ -1,5 +1,7 @@
 #include <systemc.h>
 #include "define.h"
+#include "simple_mem_if.h"
+#include "mem.h"
 
 #ifndef __SAD_H___
 #define __SAD_H___
@@ -10,8 +12,10 @@ class sad: public sc_module
 
 	void do_sad(void);
 
-	sad(sc_module_name nm, mem MEM) :
-		sc_module(nm), MEM(MEM)
+	sc_clock clk;
+
+public :
+	sad(sc_module_name nm, mem MEMORY) : sc_module(nm), MEM(MEMORY)
 	{
 		SC_METHOD(do_sad);
 	}
