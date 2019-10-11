@@ -4,24 +4,25 @@
 #ifndef __OSCILLATOR_H__
 #define __OSCILLATOR_H__
 
+SC_MODULE(OSCILLATOR)
 {
-  sc_out<sc_logic> clk;
+  sc_out<sc_logic> os_clk;
 
   void func()
   {
     while(true)
     {
-      clk.write(sc_logic_0);
+	  os_clk.write(sc_logic_0);
       wait(5, SC_NS);
-      clk.write(sc_logic_1);
+	  os_clk.write(sc_logic_1);
       wait(5, SC_NS);
     }
   }
 
-  OSCILLATOR(sc_module_name nm) :
-    sc_module(nm)
+  SC_CTOR(OSCILLATOR)
   {
-    SC_METHOD(func);
+	  SC_THREAD(func);
   }
+  
 };
 #endif //__OSCILLATOR_H__
