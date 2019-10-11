@@ -7,10 +7,10 @@ LIB_DIRS=$(SYSTEMC)/lib-$(SYSTEMC_ARCH)
 INCLUDE_DIRS = -I. -I$(SYSTEMC)/include
 
 # header files used, for dependency checking
-HEADERS = define.h mem_if.h mem.h mem_rtl.h sad.h
+HEADERS = define.h simple_mem_if.h mem.h mem_rtl.h sad.h oscillator.h simple_mem.h
 
 # source files used, for depedency checking
-SOURCES = main.cpp
+SOURCES = main.cpp simple_mem.cpp mem.cpp
 
 DEPENDENCIES = \
 	Makefile \
