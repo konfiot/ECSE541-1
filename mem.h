@@ -29,35 +29,13 @@ class mem : public sc_module, public simple_mem_if
 	public:
 
 		// constructor
-		mem(sc_module_name nm, char* filename) : sc_module(nm)
-		{
-			// Module instance signal connections
-			mem_rtl = new MEMORY_RTL("mem_rtl", filename);
-			oscillator = new OSCILLATOR("oscillator");
-
-			// RTL memory
-			mem_rtl->clk(clk_sig);
-			mem_rtl->addr(addr_sig);
-			mem_rtl->dataIn(dataIn_sig);
-			mem_rtl->dataOut(dataOut_sig);
-			mem_rtl->ren(ren_sig);
-			mem_rtl->wen(wen_sig);
-			mem_rtl->ack(ack_sig);
-
-			// Oscillator
-			oscillator->os_clk(clk_sig);
-		}
+		mem(sc_module_name nm, char* filename);
 
 		bool Read(unsigned int addr, unsigned int& data);
-
 		bool Write(unsigned int addr, unsigned int data);
 
 		// destructor
-		~mem()
-		{
-			delete mem_rtl;
-			delete oscillator;
-		}
+		~mem();
 };
 
 #endif //___MEM_H___

@@ -25,3 +25,27 @@ bool mem::Write(unsigned int addr, unsigned int data)
 
 	return ack;
 }
+mem::~mem() {
+	delete mem_rtl;
+	delete oscillator;
+}
+
+mem::mem(sc_module_name nm, char* filename) : sc_module(nm) {
+	// Module instance signal connections
+	mem_rtl = new MEMORY_RTL("mem_rtl", filename);
+	oscillator = new OSCILLATOR("oscillator");
+
+	// RTL memory
+	mem_rtl->clk(clk_sig);
+	mem_rtl->addr(addr_sig);
+	mem_rtl->dataIn(dataIn_sig);
+	mem_rtl->dataOut(dataOut_sig);
+	mem_rtl->ren(ren_sig);
+	mem_rtl->wen(wen_sig);
+	mem_rtl->ack(ack_sig);
+
+	// Oscillator
+	oscillator->os_clk(clk_sig);
+}
+
+
