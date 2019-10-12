@@ -19,11 +19,10 @@ class MEMORY_RTL: public sc_module
 
 		SC_HAS_PROCESS(MEMORY_RTL);
 
-		MEMORY_RTL(sc_module_name nm, char* filename) : sc_module(nm) {
-
-			// Initialize memory
+		MEMORY_RTL(sc_module_name nm, char* filename) : sc_module(nm)
+		{
+			// Initialize memory with file
 			unsigned int data, i = 0;
-
 
 			std::ifstream memfile;
 			memfile.open(filename);
@@ -34,42 +33,43 @@ class MEMORY_RTL: public sc_module
 
 			while(memfile >> data && i < MEM_SIZE)
 			{
-				mem[i] = (sc_uint<32>)(data);
+				mem[i] = static_cast<sc_uint<32>>(data);
 				i++;
 			}
-
 
 			SC_METHOD(rtl);
 			sensitive << clk.pos();
 		}
 
-		void rtl() {
+		void rtl()
+		{
 			/*
 			   if ren : output data at addr on dataOut
 			   if wen : write data at addr
 			   if addr is valid : ack is
 			 */
 
-			if (ren.read() == sc_logic_0 && wen.read() == sc_logic_0) {
+			if (ren.read() == sc_logic_0 && wen.read() == sc_logic_0)
+			{
 				ack.write(sc_logic_Z);
 				return;
 			}
 			// RW functions
 			// address valid
-			sc_uint<32> addr_val = addr.read();
+			unsigned int addr_val = static_cast<sc_uint<32>>(addr.read());
 			if (addr_val < MEM_SIZE)
 			{
 				// Read mode
 				if(ren.read() == sc_logic_1)
 				{
 					//std::cout << "Reading from Memory : addr " << addr_val << ", value " << mem[(unsigned int) addr_val] << std::endl;
-					dataOut.write(mem[(unsigned int)addr_val]);
+					dataOut.write(mem[addr_val]);
 				}
 				// Write mode
 				else if (wen.read() == sc_logic_1)
 				{
 					//std::cout << "Writing to Memory : addr " << addr_val << ", value " << mem[(unsigned int) dataIn.read()] << std::endl;
-					mem[(unsigned int)addr_val] = dataIn.read();
+					mem[addr_val] = dataIn.read();
 				}
 				// address valid
 				ack.write(sc_logic_1);

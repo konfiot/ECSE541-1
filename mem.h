@@ -27,7 +27,6 @@ class mem : public sc_module, public simple_mem_if
 		sc_signal<sc_logic> clk_sig;
 
 	public:
-
 		// constructor
 		mem(sc_module_name nm, char* filename);
 
