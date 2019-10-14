@@ -3,11 +3,11 @@ First assignment of ECSE541
 
 GLOSSARY:
 
-- define.h : contains the device and test becnh properties
+- define.h : contains the device and test bench properties
 - main.cpp : file that will run the test on both simple and rtl memories
-- mem.h : simple_meme_if wrapper for the RTL memory implementation (Assignment pasrt 2)
-- mem.cpp : implements the logc for the methonds in the mem class (Assignment pasrt 2)
-- mem_rtl.h : implements thet RTL verion of the memory (Assignment pasrt 2)
+- mem.h : simple_meme_if wrapper for the RTL memory implementation (Assignment part 2)
+- mem.cpp : implements the logc for the methonds in the mem class (Assignment part 2)
+- mem_rtl.h : implements thet RTL verion of the memory (Assignment part 2)
 - mem_init.txt : memory initialization file
 - sad.h : implements the sum of absolute differences for both rtl and simple memory
 - simple_mem_if.h : memory interface
