@@ -7,15 +7,16 @@
 SC_MODULE(OSCILLATOR)
 {
   sc_out<sc_logic> os_clk;
+  double clock_period_2 = CLOCK_PERIOD / 2;
 
   void func()
   {
     while(true)
     {
-	  os_clk.write(sc_logic_0);
-      wait(5, SC_NS);
-	  os_clk.write(sc_logic_1);
-      wait(5, SC_NS);
+	     os_clk.write(sc_logic_0);
+       wait(clock_period_2, SC_NS);
+	     os_clk.write(sc_logic_1);
+       wait(clock_period_2, SC_NS);
     }
   }
 
@@ -23,6 +24,6 @@ SC_MODULE(OSCILLATOR)
   {
 	  SC_THREAD(func);
   }
-  
+
 };
 #endif //__OSCILLATOR_H__
