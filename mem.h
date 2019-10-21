@@ -1,47 +1,40 @@
-#include <iostream>
 #include <systemc.h>
-#include "mem_if.h"
 #include "define.h"
+#include "simple_mem_if.h"
+#include "mem_rtl.h"
+#include "oscillator.h"
 
-class simple_mem : public sc_module, public simple_mem_if
+#ifndef ___MEM_H___
+#define ___MEM_H___
+
+typedef sc_uint<32> myDatType;
+typedef sc_signal<myDatType> mySignal;
+
+class mem : public sc_module, public simple_mem_if
 {
 	private:
-		unsigned int data[MEM_SIZE] = {0};
+		// Module declarations
+		MEMORY_RTL* mem_rtl;
+		OSCILLATOR* oscillator;
+
+		// Local signal declarations
+		mySignal addr_sig;
+		mySignal dataIn_sig;
+		mySignal dataOut_sig;
+		sc_signal<sc_logic> ren_sig;
+		sc_signal<sc_logic> wen_sig;
+		sc_signal<sc_logic> ack_sig;
+		sc_signal<sc_logic> clk_sig;
 
 	public:
 		// constructor
-		simple_mem(sc_module_name nm, char* filename) : sc_module(nm) {
-			unsigned int data, i = 0;
+		mem(sc_module_name nm, char* filename);
 
-			std::ifstream memfile;
-			memfile.open(filename);
-			if (!memfile) {
-				std::cerr << "Error opening file";
-				exit(1);
-			}
+		bool Read(unsigned int addr, unsigned int& data);
+		bool Write(unsigned int addr, unsigned int data);
 
-			while(memfile >> data) {
-				this->Write(i, data);
-				i++;
-			}
-		}
-
-		bool Read(unsigned int addr, unsigned int& data) {
-			if (addr < MEM_SIZE-1) {
-				data = this->data[addr];
-				return true;
-			}
-
-			return false;
-		}
-
-		bool Write(unsigned int addr, unsigned int data) {
-			if (addr < MEM_SIZE-1) {
-				this->data[addr] = data;
-				return true;
-			}
-
-			return false;
-		}
-
+		// destructor
+		~mem();
 };
+
+#endif //___MEM_H___

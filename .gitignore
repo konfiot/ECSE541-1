@@ -32,3 +32,6 @@
 *.un~
 *.swp
 *.txt
+
+.vscode/*
+main
